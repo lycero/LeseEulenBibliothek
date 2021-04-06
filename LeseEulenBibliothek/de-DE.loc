@@ -1,0 +1,47 @@
+application_title|LeseEulenBibliothek
+btn_save_data|Speichern
+tt_save_data|Speichern der aktuellen Datensätze
+btn_scan_archive|Scannen
+tt_scan_archive|Durchsucht das Archiv nach neuen Dateien
+btn_update|Aktualisieren
+tt_update|Vollständiges update vom Archiv in den Ausgabe Ordner
+btn_convert|Konvertieren
+tt_convert|Konvertiert die Dateien des aktuell ausgewählten Ordners
+btn_validate|Validieren
+tt_validate|Validieren & reparieren der indices
+btn_output|Ausgabe
+tt_output|Füllt den Ausgabe Ordner
+tt_config_show|Zeigt die Konfiguration
+tt_config_hide|Versteckt die Konfiguration
+btn_configsave|Konfiguration speichern
+tt_configsave|Änderungen an der Konfiguration persistieren
+btn_config_reset|Zurücksetzten
+tt_config_reset|Konfiguration auf die Werkseinstellung zurückstellen
+tt_reoder_files|Dateien neu sortieren und Lücken schließen
+label_filelist|Dateien:
+label_path|Pfad:
+label_index|Index:
+label_name|Name:
+progress_step_scan|Scannen
+progress_step_output|Erstelle Ausgabe
+progress_step_convert|Konvertieren
+config_tt_filechooser|Öffnet einen Dialog zur Dateiauswahl
+config_tt_folderchooser|Öffnet einen Dialog zur Ordnerauswahl
+config_label_archive|Archiv-Ordner
+config_tt_archive|Archiv-Ordner
+config_label_output|Ausgabe-Ordner
+config_tt_output|Ausgabe-Ordner
+config_label_language|Sprache
+config_tt_language|Kultur für die Übersetzungen (de-DE, en-GB, ...)
+config_label_datafile|Datendatei
+config_tt_datafile|Pfad zur Datei in der die Ordner- und Dateidaten gespeichert werden
+config_tt_converterbinary|Pfad zum Konverter welcher zum umwandeln der nicht mp3 Formate verwendet wird
+config_label_converterbinary|Konverter
+config_label_converterfolder|Konvertierungs-Ordner
+config_tt_converterfolder|Ordner zum zwischenspeichern der konvertierten Dateien
+config_label_converterargument|Konverter Kommando
+config_tt_converterargument|Argumente welche an den Konverter weitergeleitet werden, die Platzhalter werden mit Quell- und Zieldatei ersetzt
+config_label_convertercount|Konverteranzahl
+config_tt_convertercount|Maximale Anzahl gleichzeitig laufender Konverter
+config_label_convertall|Konvertiere *.mp3 Dateien
+config_tt_convertall|Der Konverter wird auch für *.mp3 Dateien ausgeführt

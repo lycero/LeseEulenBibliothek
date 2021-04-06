@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="LeseEulenBibliothek.Templates.ConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LeseEulenBibliothek.Templates"
+             xmlns:core="clr-namespace:LeseEulenBibliothek.Core"
+             xmlns:viewmodel="clr-namespace:LeseEulenBibliothek.ViewModel"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewmodel:ConfigViewModel, IsDesignTimeCreatable=True}" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource ButtonForeground}" />
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Padding" Value="2 5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource ButtonForeground}" />
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0 0.5"/>
+            <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource ButtonForeground}" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <DockPanel x:Name="LanguageSetting" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.LanguageTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.LanguageLabel}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Left"/>
+            <TextBox Text="{Binding Data.Language, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <DockPanel x:Name="DataFile" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.DatafileTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.DatafileLabel}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Left"/>
+            <Button Command="{Binding OpenFileChooserCommand}" CommandParameter="{x:Static viewmodel:ConfigConstants.Datafile}" 
+                    ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.FileChooserTooltip}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Right">
+                <Viewbox Width="20" Height="20">
+                    <Canvas Width="24" Height="24">
+                        <Path Fill="{StaticResource ButtonIconForeground}" Data="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M9,4L11,6H19A2,2 0 0,1 21,8V11.81C19.83,10.69 18.25,10 16.5,10A6.5,6.5 0 0,0 10,16.5C10,17.79 10.37,19 11,20H3C1.89,20 1,19.1 1,18V6C1,4.89 1.89,4 3,4H9Z" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+            <TextBox Text="{Binding Data.DataFile, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <DockPanel x:Name="Archive" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ArchiveFolderTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ArchiveFolderLabel}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Left"/>
+            <Button Command="{Binding OpenFileChooserCommand}" CommandParameter="{x:Static viewmodel:ConfigConstants.ArchiveFolder}" 
+                    ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.FolderChooserTooltip}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Right">
+                <Viewbox Width="20" Height="20">
+                    <Canvas Width="24" Height="24">
+                        <Path Fill="{StaticResource ButtonIconForeground}" Data="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M9,4L11,6H19A2,2 0 0,1 21,8V11.81C19.83,10.69 18.25,10 16.5,10A6.5,6.5 0 0,0 10,16.5C10,17.79 10.37,19 11,20H3C1.89,20 1,19.1 1,18V6C1,4.89 1.89,4 3,4H9Z" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+            <TextBox Text="{Binding Data.ArchiveFolder, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <DockPanel x:Name="Output" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.OutputFolderTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.OutputFolderLabel}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Left"/>
+            <Button Command="{Binding OpenFileChooserCommand}" CommandParameter="{x:Static viewmodel:ConfigConstants.OutputFolder}" 
+                    ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.FolderChooserTooltip}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Right">
+                <Viewbox Width="20" Height="20">
+                    <Canvas Width="24" Height="24">
+                        <Path Fill="{StaticResource ButtonIconForeground}" Data="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M9,4L11,6H19A2,2 0 0,1 21,8V11.81C19.83,10.69 18.25,10 16.5,10A6.5,6.5 0 0,0 10,16.5C10,17.79 10.37,19 11,20H3C1.89,20 1,19.1 1,18V6C1,4.89 1.89,4 3,4H9Z" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+            <TextBox Text="{Binding Data.OutputFolder, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <DockPanel x:Name="ConverterBin" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ConverterBinaryTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ConverterBinaryLabel}, Converter={StaticResource translationConverter}}"/>
+            <Button Command="{Binding OpenFileChooserCommand}" CommandParameter="{x:Static viewmodel:ConfigConstants.Converter}" 
+                    ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.FileChooserTooltip}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Right">
+                <Viewbox Width="20" Height="20">
+                    <Canvas Width="24" Height="24">
+                        <Path Fill="{StaticResource ButtonIconForeground}" Data="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M9,4L11,6H19A2,2 0 0,1 21,8V11.81C19.83,10.69 18.25,10 16.5,10A6.5,6.5 0 0,0 10,16.5C10,17.79 10.37,19 11,20H3C1.89,20 1,19.1 1,18V6C1,4.89 1.89,4 3,4H9Z" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+            <TextBox Text="{Binding Data.ConverterCommand, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>            
+        </DockPanel>
+        <DockPanel x:Name="ConvertTmp" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ConverterFolderTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ConverterFolderLabel}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Left"/>
+            <Button Command="{Binding OpenFileChooserCommand}" CommandParameter="{x:Static viewmodel:ConfigConstants.ConvertedFiles}" 
+                    ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.FolderChooserTooltip}, Converter={StaticResource translationConverter}}" DockPanel.Dock="Right">
+                <Viewbox Width="20" Height="20">
+                    <Canvas Width="24" Height="24">
+                        <Path Fill="{StaticResource ButtonIconForeground}" Data="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M9,4L11,6H19A2,2 0 0,1 21,8V11.81C19.83,10.69 18.25,10 16.5,10A6.5,6.5 0 0,0 10,16.5C10,17.79 10.37,19 11,20H3C1.89,20 1,19.1 1,18V6C1,4.89 1.89,4 3,4H9Z" />
+                    </Canvas>
+                </Viewbox>
+            </Button>
+            <TextBox Text="{Binding Data.ConvertFolder, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <DockPanel x:Name="ConverterArgs" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ConverterArgumentTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ConverterArgumentLabel}, Converter={StaticResource translationConverter}}"/>
+            <TextBox Text="{Binding Data.ConverterArgument, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>            
+        </DockPanel>
+        <DockPanel x:Name="ConverterCount" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ConverterCountTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ConverterCountLabel}, Converter={StaticResource translationConverter}}"/>
+            <TextBox Text="{Binding Data.MaxConverterCount, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+        <DockPanel x:Name="ConvertAllFiles" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ConverterConvertAllTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ConverterConvertAllLabel}, Converter={StaticResource translationConverter}}"/>
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding Data.ExecuteConverterForTargetFormat}"/>
+        </DockPanel>
+    </StackPanel>
+</UserControl>

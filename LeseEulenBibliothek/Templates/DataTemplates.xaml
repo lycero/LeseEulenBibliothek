@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:data="clr-namespace:LeseEulenBibliothek.Data"
+                    xmlns:local="clr-namespace:LeseEulenBibliothek.Templates" xmlns:core="clr-namespace:LeseEulenBibliothek.Core">
+    <core:CollectionConverter x:Key="collectionConverter"/>
+    <core:TranslationConverter x:Key="translationConverter"/>
+    <DataTemplate DataType="{x:Type data:FolderData}">
+        <Border BorderThickness="1 1 1 1" BorderBrush="{StaticResource ButtonIconForeground}">            
+            <DockPanel Margin="5">
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Source={x:Static core:TranslationTexts.NameLabel}, Converter={StaticResource translationConverter}}"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding FolderName}" HorizontalAlignment="Stretch" DockPanel.Dock="Right"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Source={x:Static core:TranslationTexts.IndexLabel}, Converter={StaticResource translationConverter}}"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" FontWeight="Bold" Text="{Binding IndexNumber, StringFormat={}{0:d2}}" HorizontalAlignment="Stretch" DockPanel.Dock="Right"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Source={x:Static core:TranslationTexts.PathLabel}, Converter={StaticResource translationConverter}}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding FolderPath}" />
+                </Grid>
+                <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+                    <TextBlock DockPanel.Dock="Left" Text="{Binding Source={x:Static core:TranslationTexts.FileListLabel}, Converter={StaticResource translationConverter}}" Margin="0 5 5 2"/>
+                    <Button Command="{Binding ReOrderCommand}" 
+                            VerticalAlignment="Center"  HorizontalAlignment="Right"
+                            BorderThickness="0" Margin="0" 
+                            DockPanel.Dock="Right"
+                            Padding="0" Background="Transparent" 
+                            ToolTip="{Binding Source={x:Static core:TranslationTexts.ReorderFilesTooltip}, Converter={StaticResource translationConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox Width="16" Height="16">
+                                <Canvas Width="24" Height="24">
+                                    <Path Fill="{StaticResource ButtonIconForeground}" Data="M19 17H22L18 21L14 17H17V3H19M2 17H12V19H2M6 5V7H2V5M2 11H9V13H2V11Z" />
+                                </Canvas>
+                            </Viewbox>
+                        </StackPanel>
+                    </Button>
+                </DockPanel>
+                <ListBox ItemsSource="{Binding EntryCollection, Converter={StaticResource collectionConverter}}"/>
+            </DockPanel>        
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type data:FolderDataEntry}">
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding IndexNumber, StringFormat={}{0:d3}}" FontWeight="Bold"/>
+            <TextBlock Text=":" Margin="3 0"/>
+            <TextBlock Text="{Binding OriginalTitle}" FontStyle="Italic" />
+        </StackPanel>
+    </DataTemplate>
+    <Style x:Name="buttonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Padding" Value="20 5" />
+        <Setter Property="BorderThickness" Value="0 1 1 0" />
+        <Setter Property="FontFamily" Value="{StaticResource MainFontFamily}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForeground}" />
+    </Style>
+</ResourceDictionary>

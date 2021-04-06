@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="LeseEulenBibliothek.Templates.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:LeseEulenBibliothek.ViewModel"
+             xmlns:data="clr-namespace:LeseEulenBibliothek.Data"
+             xmlns:local="clr-namespace:LeseEulenBibliothek.Templates" 
+             xmlns:core="clr-namespace:LeseEulenBibliothek.Core"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel, IsDesignTimeCreatable=True}">
+    <UserControl.Resources>
+        <core:CollectionConverter x:Key="collectionConverter"/>
+        <core:BoolToVisibilityConverter x:Key="trueToVisibleConverter"/>
+        <core:BoolToVisibilityConverter x:Key="falseToVisibleConverter" TrueValue="Collapsed" FalseValue="Visible"/>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel x:Name="MainDataView" Visibility="{Binding IsShowConfig, Converter={StaticResource falseToVisibleConverter}}">
+            <!-- Icons by https://materialdesignicons.com/ -->
+            <DockPanel Height="32" x:Name="HeaderButtons" DockPanel.Dock="Top" LastChildFill="False">
+                <Button Command="{Binding SaveDataCommand}" DockPanel.Dock="Left" ToolTip="{Binding Source={x:Static core:TranslationTexts.SaveDataTooltip}, Converter={StaticResource translationConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16" Height="16">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Padding="5 0 0 0" Text="{Binding Source={x:Static core:TranslationTexts.SaveDataButton}, Converter={StaticResource translationConverter}}"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ScanFolderCommand}" DockPanel.Dock="Left" ToolTip="{Binding Source={x:Static core:TranslationTexts.ScanTooltip}, Converter={StaticResource translationConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16" Height="16">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M16.5,12C19,12 21,14 21,16.5C21,17.38 20.75,18.21 20.31,18.9L23.39,22L22,23.39L18.88,20.32C18.19,20.75 17.37,21 16.5,21C14,21 12,19 12,16.5C12,14 14,12 16.5,12M16.5,14A2.5,2.5 0 0,0 14,16.5A2.5,2.5 0 0,0 16.5,19A2.5,2.5 0 0,0 19,16.5A2.5,2.5 0 0,0 16.5,14M9,4L11,6H19A2,2 0 0,1 21,8V11.81C19.83,10.69 18.25,10 16.5,10A6.5,6.5 0 0,0 10,16.5C10,17.79 10.37,19 11,20H3C1.89,20 1,19.1 1,18V6C1,4.89 1.89,4 3,4H9Z" />
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Padding="5 0 0 0" Text="{Binding Source={x:Static core:TranslationTexts.ScanButton}, Converter={StaticResource translationConverter}}"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding UpdateAllCommand}" DockPanel.Dock="Left" ToolTip="{Binding Source={x:Static core:TranslationTexts.UpdateTooltip}, Converter={StaticResource translationConverter}}">
+                    <StackPanel Orientation="Horizontal">                    
+                        <Viewbox Width="16" Height="16">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M17.5 15.5C17.5 16.61 16.61 17.5 15.5 17.5S13.5 16.61 13.5 15.5 14.4 13.5 15.5 13.5 17.5 14.4 17.5 15.5M8.5 13.5C7.4 13.5 6.5 14.4 6.5 15.5S7.4 17.5 8.5 17.5 10.5 16.61 10.5 15.5 9.61 13.5 8.5 13.5M23 15V18C23 18.55 22.55 19 22 19H21V20C21 21.11 20.11 22 19 22H5C3.9 22 3 21.11 3 20V19H2C1.45 19 1 18.55 1 18V15C1 14.45 1.45 14 2 14H3C3 10.13 6.13 7 10 7H11V5.73C10.4 5.39 10 4.74 10 4C10 2.9 10.9 2 12 2S14 2.9 14 4C14 4.74 13.6 5.39 13 5.73V7H14C17.87 7 21 10.13 21 14H22C22.55 14 23 14.45 23 15M21 16H19V14C19 11.24 16.76 9 14 9H10C7.24 9 5 11.24 5 14V16H3V17H5V20H19V17H21V16Z" />
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Padding="5 0 0 0" Text="{Binding Source={x:Static core:TranslationTexts.UpdateButton}, Converter={StaticResource translationConverter}}"/>
+                    </StackPanel>
+                </Button>
+                <Button Content="{Binding Source={x:Static core:TranslationTexts.ConvertButton}, Converter={StaticResource translationConverter}}" 
+                        ToolTip="{Binding Source={x:Static core:TranslationTexts.ConvertTooltip}, Converter={StaticResource translationConverter}}"
+                        DockPanel.Dock="Left" Command="{Binding ConvertFolderCommand}" Visibility="{Binding VisibleInDebug}"/>
+                <Button Content="{Binding Source={x:Static core:TranslationTexts.ValidateButton}, Converter={StaticResource translationConverter}}" 
+                        ToolTip="{Binding Source={x:Static core:TranslationTexts.ValidateTooltip}, Converter={StaticResource translationConverter}}"
+                        DockPanel.Dock="Left" Command="{Binding ValidateCollectionCommand}" Visibility="{Binding VisibleInDebug}"/>
+                <Button Content="{Binding Source={x:Static core:TranslationTexts.OutputButton}, Converter={StaticResource translationConverter}}" 
+                        ToolTip="{Binding Source={x:Static core:TranslationTexts.OutputTooltip}, Converter={StaticResource translationConverter}}"
+                        DockPanel.Dock="Left" Command="{Binding CreateOutputCommand}" Visibility="{Binding VisibleInDebug}"/>
+                <ToggleButton IsChecked="{Binding IsShowConfig}" ToolTip="{Binding Source={x:Static core:TranslationTexts.ConfigShowTooltip}, Converter={StaticResource translationConverter}}"
+                              DockPanel.Dock="Right" BorderBrush="Transparent" Background="Transparent">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="24" Height="24">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M15.9,18.45C17.25,18.45 18.35,17.35 18.35,16C18.35,14.65 17.25,13.55 15.9,13.55C14.54,13.55 13.45,14.65 13.45,16C13.45,17.35 14.54,18.45 15.9,18.45M21.1,16.68L22.58,17.84C22.71,17.95 22.75,18.13 22.66,18.29L21.26,20.71C21.17,20.86 21,20.92 20.83,20.86L19.09,20.16C18.73,20.44 18.33,20.67 17.91,20.85L17.64,22.7C17.62,22.87 17.47,23 17.3,23H14.5C14.32,23 14.18,22.87 14.15,22.7L13.89,20.85C13.46,20.67 13.07,20.44 12.71,20.16L10.96,20.86C10.81,20.92 10.62,20.86 10.54,20.71L9.14,18.29C9.05,18.13 9.09,17.95 9.22,17.84L10.7,16.68L10.65,16L10.7,15.31L9.22,14.16C9.09,14.05 9.05,13.86 9.14,13.71L10.54,11.29C10.62,11.13 10.81,11.07 10.96,11.13L12.71,11.84C13.07,11.56 13.46,11.32 13.89,11.15L14.15,9.29C14.18,9.13 14.32,9 14.5,9H17.3C17.47,9 17.62,9.13 17.64,9.29L17.91,11.15C18.33,11.32 18.73,11.56 19.09,11.84L20.83,11.13C21,11.07 21.17,11.13 21.26,11.29L22.66,13.71C22.75,13.86 22.71,14.05 22.58,14.16L21.1,15.31L21.15,16L21.1,16.68M6.69,8.07C7.56,8.07 8.26,7.37 8.26,6.5C8.26,5.63 7.56,4.92 6.69,4.92A1.58,1.58 0 0,0 5.11,6.5C5.11,7.37 5.82,8.07 6.69,8.07M10.03,6.94L11,7.68C11.07,7.75 11.09,7.87 11.03,7.97L10.13,9.53C10.08,9.63 9.96,9.67 9.86,9.63L8.74,9.18L8,9.62L7.81,10.81C7.79,10.92 7.7,11 7.59,11H5.79C5.67,11 5.58,10.92 5.56,10.81L5.4,9.62L4.64,9.18L3.5,9.63C3.41,9.67 3.3,9.63 3.24,9.53L2.34,7.97C2.28,7.87 2.31,7.75 2.39,7.68L3.34,6.94L3.31,6.5L3.34,6.06L2.39,5.32C2.31,5.25 2.28,5.13 2.34,5.03L3.24,3.47C3.3,3.37 3.41,3.33 3.5,3.37L4.63,3.82L5.4,3.38L5.56,2.19C5.58,2.08 5.67,2 5.79,2H7.59C7.7,2 7.79,2.08 7.81,2.19L8,3.38L8.74,3.82L9.86,3.37C9.96,3.33 10.08,3.37 10.13,3.47L11.03,5.03C11.09,5.13 11.07,5.25 11,5.32L10.03,6.06L10.06,6.5L10.03,6.94Z" />
+                            </Canvas>
+                        </Viewbox>
+                    </StackPanel>
+                </ToggleButton>
+            </DockPanel>
+            <Border DockPanel.Dock="Top" Name="HeaderDivider" Background="{StaticResource ButtonIconForeground}" BorderBrush="{StaticResource ButtonIconForeground}" BorderThickness="2"/>
+            <Grid DockPanel.Dock="Top" Name="DataView">            
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ListBox BorderBrush="{StaticResource ButtonIconForeground}" Grid.Column="0" ItemsSource="{Binding Data.Collection, Converter={StaticResource collectionConverter}}" SelectedItem="{Binding CurrentSelectedFolder}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type data:FolderData}">
+                            <TextBlock  HorizontalAlignment="Stretch" >
+                                <Run FontWeight="Bold" Text="{Binding IndexNumber, StringFormat={}{0:d2}}"/>
+                                <Run Text=":"/>
+                                <Run FontStyle="Italic" Text="{Binding FolderName}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <GridSplitter Width="5" Grid.Column="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext"/>
+                <ContentPresenter Content="{Binding CurrentSelectedFolder}" Grid.Column="2" MinWidth="300"/>
+            </Grid>
+        </DockPanel>
+        <DockPanel x:Name="ConfigView" Visibility="{Binding IsShowConfig, Converter={StaticResource trueToVisibleConverter}}">
+            <DockPanel Height="32" x:Name="HeaderButtonsConfig" DockPanel.Dock="Top" LastChildFill="False">
+                <Button Command="{Binding ConfigView.SaveConfigCommand}" DockPanel.Dock="Left" ToolTip="{Binding Source={x:Static core:TranslationTexts.SaveConfigTooltip}, Converter={StaticResource translationConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16" Height="16">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Padding="5 0 0 0" Text="{Binding Source={x:Static core:TranslationTexts.SaveConfigButton}, Converter={StaticResource translationConverter}}"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ConfigView.ResetConfigCommand}" DockPanel.Dock="Left" ToolTip="{Binding Source={x:Static core:TranslationTexts.ResetConfigTooltip}, Converter={StaticResource translationConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="16" Height="16">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M10,10.2L14,6.2L17.8,10L13.8,14L12.4,12.6L15,9.9L14.1,9L11.5,11.6L10,10.2M20.7,5.6L18.4,3.3C18.2,3.1 17.9,3 17.7,3C17.5,3 17.2,3.1 17,3.3L15.2,5.1L19,8.9L20.7,7C21.1,6.7 21.1,6 20.7,5.6M19,21.7L17.7,23L11.2,16.5L6.8,21H3V17.2L7.5,12.7L1,6.3L2.3,5L19,21.7M9.8,15.1L8.9,14.2L5,18.1V19H5.9L9.8,15.1Z" />
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Padding="5 0 0 0" Text="{Binding Source={x:Static core:TranslationTexts.ResetConfigButton}, Converter={StaticResource translationConverter}}"/>
+                    </StackPanel>
+                </Button>
+                <ToggleButton IsChecked="{Binding IsShowConfig}" ToolTip="{Binding Source={x:Static core:TranslationTexts.ConfigHideTooltip}, Converter={StaticResource translationConverter}}"
+                              DockPanel.Dock="Right" BorderBrush="Transparent" Background="Transparent">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="24" Height="24">
+                            <Canvas Width="24" Height="24">
+                                <Path Fill="{StaticResource ButtonIconForeground}" Data="M15.9,18.45C17.25,18.45 18.35,17.35 18.35,16C18.35,14.65 17.25,13.55 15.9,13.55C14.54,13.55 13.45,14.65 13.45,16C13.45,17.35 14.54,18.45 15.9,18.45M21.1,16.68L22.58,17.84C22.71,17.95 22.75,18.13 22.66,18.29L21.26,20.71C21.17,20.86 21,20.92 20.83,20.86L19.09,20.16C18.73,20.44 18.33,20.67 17.91,20.85L17.64,22.7C17.62,22.87 17.47,23 17.3,23H14.5C14.32,23 14.18,22.87 14.15,22.7L13.89,20.85C13.46,20.67 13.07,20.44 12.71,20.16L10.96,20.86C10.81,20.92 10.62,20.86 10.54,20.71L9.14,18.29C9.05,18.13 9.09,17.95 9.22,17.84L10.7,16.68L10.65,16L10.7,15.31L9.22,14.16C9.09,14.05 9.05,13.86 9.14,13.71L10.54,11.29C10.62,11.13 10.81,11.07 10.96,11.13L12.71,11.84C13.07,11.56 13.46,11.32 13.89,11.15L14.15,9.29C14.18,9.13 14.32,9 14.5,9H17.3C17.47,9 17.62,9.13 17.64,9.29L17.91,11.15C18.33,11.32 18.73,11.56 19.09,11.84L20.83,11.13C21,11.07 21.17,11.13 21.26,11.29L22.66,13.71C22.75,13.86 22.71,14.05 22.58,14.16L21.1,15.31L21.15,16L21.1,16.68M6.69,8.07C7.56,8.07 8.26,7.37 8.26,6.5C8.26,5.63 7.56,4.92 6.69,4.92A1.58,1.58 0 0,0 5.11,6.5C5.11,7.37 5.82,8.07 6.69,8.07M10.03,6.94L11,7.68C11.07,7.75 11.09,7.87 11.03,7.97L10.13,9.53C10.08,9.63 9.96,9.67 9.86,9.63L8.74,9.18L8,9.62L7.81,10.81C7.79,10.92 7.7,11 7.59,11H5.79C5.67,11 5.58,10.92 5.56,10.81L5.4,9.62L4.64,9.18L3.5,9.63C3.41,9.67 3.3,9.63 3.24,9.53L2.34,7.97C2.28,7.87 2.31,7.75 2.39,7.68L3.34,6.94L3.31,6.5L3.34,6.06L2.39,5.32C2.31,5.25 2.28,5.13 2.34,5.03L3.24,3.47C3.3,3.37 3.41,3.33 3.5,3.37L4.63,3.82L5.4,3.38L5.56,2.19C5.58,2.08 5.67,2 5.79,2H7.59C7.7,2 7.79,2.08 7.81,2.19L8,3.38L8.74,3.82L9.86,3.37C9.96,3.33 10.08,3.37 10.13,3.47L11.03,5.03C11.09,5.13 11.07,5.25 11,5.32L10.03,6.06L10.06,6.5L10.03,6.94Z" />
+                            </Canvas>
+                        </Viewbox>
+                    </StackPanel>
+                </ToggleButton>
+            </DockPanel>
+            <Border DockPanel.Dock="Top" Name="HeaderDividerConfig" Background="{StaticResource ButtonIconForeground}" BorderBrush="{StaticResource ButtonIconForeground}" BorderThickness="2"/>
+            <local:ConfigView DockPanel.Dock="Top" DataContext="{Binding ConfigView}"/>
+        </DockPanel>
+        <Grid DataContext="{Binding ProgressInfo}" Visibility="{Binding ProgressVisibility}">
+            <Border Background="LightGray" Opacity="0.5"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">                    
+                    <Viewbox Width="24" Height="24">
+                        <Canvas Width="24" Height="24">
+                            <Path Fill="Black" Data="M13,2.03V2.05L13,4.05C17.39,4.59 20.5,8.58 19.96,12.97C19.5,16.61 16.64,19.5 13,19.93V21.93C18.5,21.38 22.5,16.5 21.95,11C21.5,6.25 17.73,2.5 13,2.03M11,2.06C9.05,2.25 7.19,3 5.67,4.26L7.1,5.74C8.22,4.84 9.57,4.26 11,4.06V2.06M4.26,5.67C3,7.19 2.25,9.04 2.05,11H4.05C4.24,9.58 4.8,8.23 5.69,7.1L4.26,5.67M2.06,13C2.26,14.96 3.03,16.81 4.27,18.33L5.69,16.9C4.81,15.77 4.24,14.42 4.06,13H2.06M7.1,18.37L5.67,19.74C7.18,21 9.04,21.79 11,22V20C9.58,19.82 8.23,19.25 7.1,18.37M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
+                        </Canvas>
+                    </Viewbox>
+                    <TextBlock Margin="5 0" Text="{Binding TaskText}" FontSize="16" FontWeight="Bold"/>
+                </StackPanel>
+                <ItemsControl Margin="0 5"  ItemsSource="{Binding ProgressTexts}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>                            
+                            <TextBlock Text="{Binding}" FontStyle="Italic" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl >                
+                <ProgressBar IsIndeterminate="True" Height="5" Width="100" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

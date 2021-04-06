@@ -1,0 +1,15 @@
+﻿<Window x:Class="LeseEulenBibliothek.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:data="clr-namespace:LeseEulenBibliothek.Data"
+        xmlns:local="clr-namespace:LeseEulenBibliothek" 
+        xmlns:templates="clr-namespace:LeseEulenBibliothek.Templates"
+        xmlns:core="clr-namespace:LeseEulenBibliothek.Core"
+        mc:Ignorable="d"
+        Title="{Binding Source={x:Static core:TranslationTexts.Title}, Converter={StaticResource translationConverter}}" Height="450" Width="800">
+    <Grid>
+        <templates:MainView DataContext="{Binding MainView}"/>
+    </Grid>
+</Window>
