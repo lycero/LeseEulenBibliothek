@@ -7,6 +7,10 @@ namespace LeseEulenBibliothek.Core
 {
     public abstract class ObservableBase : INotifyPropertyChanged
     {
+        protected void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         protected bool Set<T>(ref T field, T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
         {
             if (object.Equals(field,value))

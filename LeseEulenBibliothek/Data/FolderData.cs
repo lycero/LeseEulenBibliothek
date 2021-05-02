@@ -34,15 +34,29 @@ namespace LeseEulenBibliothek.Data
         [JsonPropertyName("name")]
         public string FolderName 
         { 
-            get => m_FolderName; 
-            set => Set(ref m_FolderName, value); 
+            get => m_FolderName;
+            set
+            {
+                if (Set(ref m_FolderName, value))
+                    NotifyPropertyChanged(nameof(DisplayFolderPath));
+            }
         }
 
         [JsonPropertyName("path")]
         public string FolderPath
         {
             get => m_FolderPath;
-            set => Set(ref m_FolderPath, value);
+            set 
+            {
+                if (Set(ref m_FolderPath, value))
+                    NotifyPropertyChanged(nameof(DisplayFolderPath));
+            }
+        }
+
+        [JsonIgnore]
+        public string DisplayFolderPath
+        {
+            get => ResolveDisplayFolderPath();
         }
 
         [JsonPropertyName("entries")]
@@ -71,6 +85,13 @@ namespace LeseEulenBibliothek.Data
         private int CompareEntries(FolderDataEntry x, FolderDataEntry y)
         {
             return x.IndexNumber.CompareTo(y.IndexNumber);
+        }
+
+        private string ResolveDisplayFolderPath()
+        {
+            if (FolderPath == FolderName)
+                return "";
+            return $"({FolderPath})";
         }
     }
 }

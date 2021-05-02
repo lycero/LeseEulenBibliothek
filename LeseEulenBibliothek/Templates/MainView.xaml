@@ -79,9 +79,10 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type data:FolderData}">
                             <TextBlock  HorizontalAlignment="Stretch" >
-                                <Run FontWeight="Bold" Text="{Binding IndexNumber, StringFormat={}{0:d2}}"/>
+                                <Run FontWeight="Bold" Text="{Binding IndexNumber, StringFormat={}{0:d2}, Mode=OneWay}"/>
                                 <Run Text=":"/>
-                                <Run FontStyle="Italic" Text="{Binding FolderName}"/>
+                                <Run FontStyle="Italic" Text="{Binding FolderName, Mode=OneWay}"/>
+                                <Run FontStyle="Italic" FontWeight="DemiBold" Foreground="#909090" Text="{Binding DisplayFolderPath, Mode=OneWay}"/>
                             </TextBlock>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
