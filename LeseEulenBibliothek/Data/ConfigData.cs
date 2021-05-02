@@ -17,6 +17,8 @@ namespace LeseEulenBibliothek.Data
         private string m_ConverterCommand = "data\\Converter\\vlc.exe";
         private bool m_ExecuteConverterForTargetFormat = false;
         private string m_Language = "";
+        private string m_IndexRecognitionRegex = @"([\d]{2,3})";
+        private bool m_UseIndexRecognition = false;
 
         [JsonPropertyName("datafile")]
         public string DataFile { get => m_DataFile; set => Set(ref m_DataFile, value); }
@@ -36,5 +38,9 @@ namespace LeseEulenBibliothek.Data
         public string ConverterCommand { get => m_ConverterCommand; set => Set(ref m_ConverterCommand, value); }
         [JsonPropertyName("language")]
         public string Language { get => m_Language; set => Set(ref m_Language, value); }
+        [JsonPropertyName("indexrecognitionregex")]
+        public string IndexRecognitionRegex { get => m_IndexRecognitionRegex; set => Set(ref m_IndexRecognitionRegex, value); }
+        [JsonPropertyName("useindexrecognition")]
+        public bool UseIndexRecognition { get => m_UseIndexRecognition; set => Set(ref m_UseIndexRecognition, value); }
     }
 }

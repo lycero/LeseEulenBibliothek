@@ -122,7 +122,7 @@ namespace LeseEulenBibliothek.ViewModel
         }
         private async Task ScanFolderAsync()
         {
-            var scanner = new FolderScanner(Config.ArchiveFolder, ProgressInfo);
+            var scanner = new FolderScanner(Config.ArchiveFolder, Config.UseIndexRecognition ? Config.IndexRecognitionRegex : "", ProgressInfo);
             var data = await scanner.ScanFolderAsync();
             Application.Current.Dispatcher.Invoke(() =>
             {

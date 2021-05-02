@@ -80,6 +80,14 @@
             </Button>
             <TextBox Text="{Binding Data.OutputFolder, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right"/>
         </DockPanel>
+        <DockPanel x:Name="UseIndexRecognition" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.UseIndexRecognitionTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.UseIndexRecognitionLabel}, Converter={StaticResource translationConverter}}"/>
+            <CheckBox VerticalAlignment="Center" IsChecked="{Binding Data.UseIndexRecognition}"/>
+        </DockPanel>
+        <DockPanel x:Name="IndexRecognitionRegex" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.IndexRecognitionRegexTooltip}, Converter={StaticResource translationConverter}}">
+            <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.IndexRecognitionRegexLabel}, Converter={StaticResource translationConverter}}"/>
+            <TextBox Text="{Binding Data.IndexRecognitionRegex, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
         <DockPanel x:Name="ConverterBin" ToolTip="{Binding Source={x:Static core:TranslationTexts+Config.ConverterBinaryTooltip}, Converter={StaticResource translationConverter}}">
             <TextBlock Text="{Binding Source={x:Static core:TranslationTexts+Config.ConverterBinaryLabel}, Converter={StaticResource translationConverter}}"/>
             <Button Command="{Binding OpenFileChooserCommand}" CommandParameter="{x:Static viewmodel:ConfigConstants.Converter}" 

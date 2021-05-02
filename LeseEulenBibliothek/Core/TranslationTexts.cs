@@ -63,6 +63,13 @@ namespace LeseEulenBibliothek.Core
             public const string ConverterCountTooltip= "config_tt_convertercount|Max number of concurrent running converters";
             public const string ConverterConvertAllLabel= "config_label_convertall|Convert *.mp3 files";
             public const string ConverterConvertAllTooltip= "config_tt_convertall|Execute converter for *.mp3 files";
+
+            public const string UseIndexRecognitionLabel = "config_label_useindexrecognition|Detect indices from titles";
+            public const string IndexRecognitionRegexLabel = "config_label_indexrecognitionregex|Index recognition pattern";
+            public const string UseIndexRecognitionTooltip = "config_tt_config_label_useindexrecognition|Uses the index recognition pattern to detect indices from titles";
+            public const string IndexRecognitionRegexTooltip = "config_tt_indexrecognitionregex|The Regex pattern to detect indices from titles";
+
+
         }
     }
 }

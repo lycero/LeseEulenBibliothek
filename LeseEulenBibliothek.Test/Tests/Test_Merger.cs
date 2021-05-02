@@ -59,7 +59,7 @@ namespace LeseEulenBibliothek.Tests
             Assert.AreEqual(7, folder1.EntryCollection.Count);
             Assert.AreEqual(2, mainData.FolderEntries.Count);
 
-            var newData = CreateNewFolderData(1, "a_new_file", ".mp3", DateTime.Now, 1, 2, 3, 4, 5, 6);
+            var newData = CreateNewFolderData(1, "a_new_file", ".mp3", DateTime.Now, 1, 2, 3, 4, 5, 6, 15);
             var newData1a = CreateNewFolderDataEntries("file", ".mp3", createTime, 1, 2, 3, 4, 5, 6);
             foreach (var entry in newData1a)
             {
@@ -75,11 +75,14 @@ namespace LeseEulenBibliothek.Tests
             Assert.AreEqual(2, mainData.FolderEntries.Count);
             folder1 = mainData.FolderEntries.FirstOrDefault(f => f.IndexNumber == 1);
             Assert.IsNotNull(folder1);
-            Assert.AreEqual(12, folder1.EntryCollection.Count);
+            Assert.AreEqual(13, folder1.EntryCollection.Count);
             var secondFile = folder1.FileEntries[1];
             Assert.AreEqual(2, secondFile.IndexNumber);
             Assert.AreEqual("file2", secondFile.OriginalTitle);
             Assert.AreEqual(createTime, secondFile.FileTime);
+            var file15 = folder1.FileEntries.FirstOrDefault(e => e.IndexNumber == 15);
+            Assert.AreEqual(15, file15.IndexNumber);
+            Assert.AreEqual("a_new_file15", file15.OriginalTitle);
             var folder3 = mainData.FolderEntries.FirstOrDefault(f => f.IndexNumber == 3);
             Assert.IsNotNull(folder3);
             Assert.AreEqual(4, folder3.EntryCollection.Count);

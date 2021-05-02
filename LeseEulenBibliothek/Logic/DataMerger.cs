@@ -23,10 +23,12 @@ namespace LeseEulenBibliothek.Logic
         private static void MergeFolderData(FolderData mainData, FolderData mergeData)
         {
             var existingFiles = mainData.FileEntries.Select(f => f.OriginalTitle).ToHashSet();
+            var usedIndices = mainData.FileEntries.Select(f => f.IndexNumber).ToHashSet();
             var newFiles = mergeData.FileEntries.Select(f => f.OriginalTitle).ToHashSet();
             foreach (var data in mergeData.FileEntries.Where(f => !existingFiles.Contains(f.OriginalTitle)))
             {
-                data.IndexNumber = -1;
+                if(!usedIndices.Add(data.IndexNumber))
+                    data.IndexNumber = -1;
                 mainData.FileEntries.Add(data);
             }
             foreach (var removedFile in existingFiles.Where(f => !newFiles.Contains(f)))
